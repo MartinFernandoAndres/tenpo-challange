@@ -74,6 +74,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
     }
 
     private void handleErrorFilterLogin(HttpServletResponse response, Exception e) throws IOException {
+
         log.error("[Log] Error logging in: {}", e.getMessage());
         response.setHeader("error", e.getMessage());
         response.setStatus(FORBIDDEN.value());

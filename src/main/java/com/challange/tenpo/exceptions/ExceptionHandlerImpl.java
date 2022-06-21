@@ -63,8 +63,7 @@ public class ExceptionHandlerImpl extends ResponseEntityExceptionHandler {
     }
 
     @Override
-    public final ResponseEntity<Object> handleTypeMismatch(
-            TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    public final ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(INVALID_PARAMETER_TYPE, details);

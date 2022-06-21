@@ -21,7 +21,7 @@ public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+ 
     @Column(name = "endpoint")
     private String endpoint;
 
