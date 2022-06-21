@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public class HistoryServiceTest {
+public class HistoryServiceImplTest {
 
     private HistoryService service;
     private HistoryRepository repository;
@@ -21,7 +21,7 @@ public class HistoryServiceTest {
     @BeforeEach
     public void setUp() {
         repository = mock(HistoryRepository.class);
-        service = new HistoryService(repository);
+        service = new HistoryServiceImpl(repository);
     }
 
     @Test

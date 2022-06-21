@@ -4,9 +4,9 @@ import com.challange.tenpo.dtos.ResultMathDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
-public class MathServiceTest {
+public class MathServiceImplTest {
 
-    private final MathService math = new MathService();
+    private final MathService math = new MathServiceImpl();
 
     @Test
     public void GivenSum_WhenAAndB_ShouldReturnResult() {

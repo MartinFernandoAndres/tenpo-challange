@@ -4,27 +4,8 @@ import com.challange.tenpo.entitys.History;
 
 import java.util.List;
 
-import com.challange.tenpo.repositories.HistoryRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
+public interface HistoryService {
 
-@Service
-@Slf4j
-@RequiredArgsConstructor
-public class HistoryService {
-
-    private final HistoryRepository repository;
-
-    public List<History> getHistory(Integer pageNumber, Integer pageSize, String sortBy){
-        Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
-        Page<History> pagedResult = repository.findAll(paging);
-        return pagedResult.hasContent() ? pagedResult.getContent() : List.of();
-    }
-
+    List<History> getHistory(Integer pageNumber, Integer pageSize, String sortBy);
 
 }
