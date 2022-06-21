@@ -8,7 +8,7 @@ public class Consts {
     public static final String USER_ALREADY_EXISTS = "User Already Exists";
     public static final String DATA_VALIDATION_FAILED = "Data Validation Failed";
     public static final String BAD_CREDENTIALS = "Bad credentials";
-    public static final String CONSTRAINT_VIOLATION = "Constraint violation";
+    public static final String NEGATIVE_PARAM_EXCEPTION = "Negative param";
     public static final String MISSING_PARAMETERS = "Missing parameters";
     public static final String INVALID_PARAMETER_TYPE = "Invalid parameter type";
     public static final String USER_IS_ALREADY_REGISTERED_EXCEPTION = "User is already registered: ";

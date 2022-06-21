@@ -4,6 +4,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.challange.tenpo.entitys.History;
+import com.challange.tenpo.exceptions.NegativeParamException;
 import com.challange.tenpo.repositories.HistoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ public class HistoryServiceImplTest {
     }
 
     @Test
-    public void GivenGetHistory_WhenHasHistory_ShouldReturnHistory() {
+    public void GivenGetHistory_WhenHasHistory_ShouldReturnHistory() throws NegativeParamException {
         // Arrange
         History trace = new History(1L, "/test", 200, "11", "GET");
 
@@ -44,7 +45,7 @@ public class HistoryServiceImplTest {
     }
 
     @Test
-    public void GivenGetHistory_WhenHasNotHistory_ShouldReturnResultEmpty() {
+    public void GivenGetHistory_WhenHasNotHistory_ShouldReturnResultEmpty() throws NegativeParamException {
         // Arrange
         Page<History> traces = mock(Page.class);
         when(repository.findAll(any(Pageable.class))).thenReturn(traces);
