@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import static com.challange.tenpo.config.Consts.USER_IS_ALREADY_REGISTERED_EXCEPTION;
+import static com.challange.tenpo.config.Consts.EMAIL_IS_ALREADY_REGISTERED_EXCEPTION;
 
 @RestController
 @RequestMapping("/api/user")
@@ -42,6 +43,8 @@ public class UserController {
             @Valid @RequestBody UserDTO userDTO) throws UserAlreadyExistException {
         if (userService.isUserRegistered(userDTO.getUsername().trim().toLowerCase())) {
             throw new UserAlreadyExistException(USER_IS_ALREADY_REGISTERED_EXCEPTION.concat(userDTO.getUsername()));
+        } else if (userService.isEmailRegistered(userDTO.getMail().trim().toLowerCase())){
+            throw new UserAlreadyExistException(EMAIL_IS_ALREADY_REGISTERED_EXCEPTION.concat(userDTO.getMail()));
         }
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/singup").toUriString());
         User user = new User(userDTO.getUsername().trim().toLowerCase(), userDTO.getPassword(), userDTO.getMail());

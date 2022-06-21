@@ -100,7 +100,7 @@
 					"response": []
 				},
 				{
-					"name": "Error - User Exists",
+					"name": "Error - UserName Exists",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -112,6 +112,36 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"username\": \"martinandres\",\n\t\"password\": \"1234\",\n\t\"mail\":\"martinfernandoandres1996@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/singup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"singup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - User email Exists",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"andresmartin\",\n\t\"password\": \"12344\",\n\t\"mail\":\"martinfernandoandres1996@gmail.com\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/user/singup",

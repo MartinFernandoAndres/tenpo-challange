@@ -11,6 +11,7 @@ public class Consts {
     public static final String MISSING_PARAMETERS = "Missing parameters";
     public static final String INVALID_PARAMETER_TYPE = "Invalid parameter type";
     public static final String USER_IS_ALREADY_REGISTERED_EXCEPTION = "User is already registered: ";
+    public static final String EMAIL_IS_ALREADY_REGISTERED_EXCEPTION = "Email user is already registered: ";
 
     /* Auth constants */
     public static final long ACCESS_TOKEN_EXPIRATION = 1000000;

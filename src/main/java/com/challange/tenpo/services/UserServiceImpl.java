@@ -48,8 +48,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
+    @Override
     public boolean isUserRegistered(String username) {
         return (this.getUserByUsername(username) != null);
+    }
+
+    @Override
+    public boolean isEmailRegistered(String email) {
+        return (this.getUserByEmail(email) != null);
     }
 
 }

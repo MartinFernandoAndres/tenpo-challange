@@ -52,3 +52,13 @@ Los requerimientos son los siguientes:
 
 4. Tu código debe estar disponible en un repositorio público, junto
    con las instrucciones de cómo desplegar el servicio y cómo utilizarlo.
+
+Feedback 21/6/21
+
+1. El SignUp de usuarios falla con un 500 internal server error que no es manejado cuando se trata de hacer un registro de usuario con un mismo mail
+2. El endpoint del historial de llamadas devuelve un 500 internal server error cuando se le envía un  pageSize negativo, lo mismo pasa con el pageNumber
+3. A nivel código vimos que estas realizando muchas acciones en los controller, detallo las mismas:
+   a. En el UserController estas realizando la autenticación del usuario y después realizas la generación del access token. Esta acción ya podría ser realizada por el servicio en el primer método y que el controller solo reciba el AccessTokenDTO
+   b. También en el UserController se está realizando la creación de objetos para devolver una respuesta como es en el caso del logout, esto se podría realizar directamente en el servicio.
+   c. Se están elevando excepciones en la capa del controller (UserController), esto debería de realizarlo el servicio.
+5. No se están utilizando interfaces para el MathService ni para el HistoryService
