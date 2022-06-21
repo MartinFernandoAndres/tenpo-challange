@@ -7,12 +7,11 @@ import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import javax.validation.constraints.Min;
 
+@Validated
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
@@ -25,8 +24,8 @@ public class HistoryController {
     @ApiOperation(value = "Get History")
     public ResponseEntity<List<History>> getHistoryHistory(
             @RequestHeader(required = true, value = "Authorization") String auth,
-            @RequestParam(defaultValue = "0") Integer pageNumber,
-            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "0")  @Min(value = 0, message = "PageNumber param has to be positive number") Integer pageNumber,
+            @RequestParam(defaultValue = "10") @Min(value = 0, message = "PageSize param has to be positive number") Integer pageSize,
             @RequestParam(defaultValue = "id") String sortBy) {
         return ResponseEntity.ok(historyService.getHistory(pageNumber, pageSize, sortBy));
     }

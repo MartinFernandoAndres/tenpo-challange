@@ -1,7 +1,10 @@
 package com.challange.tenpo.exceptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import javax.validation.ConstraintViolationException;
+
 import static com.challange.tenpo.config.Consts.*;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
@@ -76,5 +82,13 @@ public class ExceptionHandlerImpl extends ResponseEntityExceptionHandler {
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(BAD_CREDENTIALS, details);
         return new ResponseEntity(error, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<?> constraintViolationException(ConstraintViolationException ex, WebRequest request) {
+        List<String> details = new ArrayList<>();
+        ex.getConstraintViolations().forEach(cv -> details.add(cv.getMessage()));
+        ErrorResponse error = new ErrorResponse(CONSTRAINT_VIOLATION, details);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }

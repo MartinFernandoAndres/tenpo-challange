@@ -53,7 +53,7 @@ Los requerimientos son los siguientes:
 4. Tu código debe estar disponible en un repositorio público, junto
    con las instrucciones de cómo desplegar el servicio y cómo utilizarlo.
 
-Feedback 21/6/21
+Feedback 21/6/22
 
 1. El SignUp de usuarios falla con un 500 internal server error que no es manejado cuando se trata de hacer un registro de usuario con un mismo mail
 2. El endpoint del historial de llamadas devuelve un 500 internal server error cuando se le envía un  pageSize negativo, lo mismo pasa con el pageNumber
