@@ -1,6 +1,6 @@
 package com.challange.tenpo.services;
 
-import com.challange.tenpo.dtos.ResultResponseDTO;
+import com.challange.tenpo.dtos.ResultMathDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
@@ -13,10 +13,10 @@ public class MathServiceTest {
         // Arrange
         double a = 1.0;
         double b = 2.0;
-        ResultResponseDTO expectedResult = new ResultResponseDTO(3.0);
+        ResultMathDTO expectedResult = new ResultMathDTO(3.0);
 
         // Act
-        ResultResponseDTO result = math.sum(a, b);
+        ResultMathDTO result = math.sum(a, b);
 
         // Assert
         assertEquals(result, expectedResult);

@@ -7,7 +7,7 @@ import static java.lang.Double.compare;
 
 @Data
 @AllArgsConstructor
-public class ResultResponseDTO {
+public class ResultMathDTO {
 
     private Double result;
 
@@ -22,7 +22,7 @@ public class ResultResponseDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ResultResponseDTO other = (ResultResponseDTO) obj;
+        final ResultMathDTO other = (ResultMathDTO) obj;
         return (compare(other.result, this.result) == 0);
     }
 }

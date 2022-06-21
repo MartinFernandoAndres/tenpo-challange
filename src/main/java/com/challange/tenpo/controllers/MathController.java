@@ -1,6 +1,6 @@
 package com.challange.tenpo.controllers;
 
-import com.challange.tenpo.dtos.ResultResponseDTO;
+import com.challange.tenpo.dtos.ResultMathDTO;
 import com.challange.tenpo.services.MathService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,7 +23,7 @@ public class MathController {
 
     @GetMapping("/sum")
     @ApiOperation(value = "Suma")
-    public ResponseEntity<ResultResponseDTO> sum(
+    public ResponseEntity<ResultMathDTO> sum(
             @RequestHeader(required = true, value = "Authorization") String headerAuth,
             @RequestParam(required = true) @NotEmpty double num1,
             @RequestParam(required = true) @NotEmpty double num2) {
