@@ -1,7 +1,11 @@
 package com.challange.tenpo.services;
 
+import com.challange.tenpo.dtos.UserDTO;
 import com.challange.tenpo.entitys.User;
+import com.challange.tenpo.exceptions.UserAlreadyExistException;
 import com.challange.tenpo.repositories.UserRepository;
+
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +16,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import static com.challange.tenpo.config.Consts.EMAIL_IS_ALREADY_REGISTERED_EXCEPTION;
+import static com.challange.tenpo.config.Consts.USER_IS_ALREADY_REGISTERED_EXCEPTION;
 
 @Service
 @Slf4j
@@ -36,10 +44,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User registerUser(User user) {
+    public User registerUser(UserDTO userDTO) throws UserAlreadyExistException {
+        if (isUserRegistered(userDTO.getUsername().trim().toLowerCase())) {
+            throw new UserAlreadyExistException(USER_IS_ALREADY_REGISTERED_EXCEPTION.concat(userDTO.getUsername()));
+        } else if (isEmailRegistered(userDTO.getMail().trim().toLowerCase())){
+            throw new UserAlreadyExistException(EMAIL_IS_ALREADY_REGISTERED_EXCEPTION.concat(userDTO.getMail()));
+        }
+        User user = new User(userDTO.getUsername().trim().toLowerCase(), userDTO.getPassword(), userDTO.getMail());
         log.info("[Log] Saving user {} to database", user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return repository.save(user);
+    }
+
+    @Override
+    public URI buildSingUpUserUriCreated() {
+        return URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/singup").toUriString());
     }
 
     @Override

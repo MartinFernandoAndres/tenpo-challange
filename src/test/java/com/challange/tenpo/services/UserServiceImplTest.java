@@ -1,6 +1,8 @@
 package com.challange.tenpo.services;
 
+import com.challange.tenpo.dtos.UserDTO;
 import com.challange.tenpo.entitys.User;
+import com.challange.tenpo.exceptions.UserAlreadyExistException;
 import com.challange.tenpo.repositories.UserRepository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -61,14 +63,15 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void GivenRegisterUser_WhenItsOkInfo_ShouldRegisterOkUser() {
+    void GivenRegisterUser_WhenItsOkInfo_ShouldRegisterOkUser() throws UserAlreadyExistException {
         // Arrange
         User userToSave = new User(TESTS_USERNAME, TESTS_PASSWORD, TESTS_MAIL);
+        UserDTO userDTO = new UserDTO(TESTS_USERNAME, TESTS_PASSWORD, TESTS_MAIL);
         when(encoder.encode(TESTS_PASSWORD)).thenReturn(TESTS_PASSWORD);
         when(repository.save(userToSave)).thenReturn(userToSave);
 
         // Act
-        User user = service.registerUser(userToSave);
+        User user = service.registerUser(userDTO);
 
         // Assert
         assertEquals(user.getUsername(), userToSave.getUsername());

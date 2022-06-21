@@ -5,6 +5,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.challange.tenpo.dtos.AccessTokenDTO;
@@ -33,9 +35,9 @@ public class AuthService {
     @Autowired
     private Environment env;
 
-    public Authentication authenticate(String username, String password) {
+    public AccessTokenDTO authenticate(String username, String password) {
         try {
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            return generateAccessToken(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password)));
         } catch (DisabledException e) {
             log.info("[Log] Username {} is not active", username);
             throw new DisabledException(USER_IS_NOT_ACTIVE_EXCEPTION);
@@ -45,7 +47,7 @@ public class AuthService {
         }
     }
 
-    public AccessTokenDTO generateAccessToken(Authentication auth) {
+    private AccessTokenDTO generateAccessToken(Authentication auth) {
         User user = (User) auth.getPrincipal();
         Algorithm algorithm = Algorithm.HMAC256(env.getProperty(SECRET_KEY).getBytes());
         long startTime = System.currentTimeMillis();
@@ -62,14 +64,16 @@ public class AuthService {
 
     }
 
-    public String invalidateAccessToken(String authHeader) {
+    public Map<String, String> invalidateAccessToken(String authHeader) {
         String token = authHeader.substring(TOKEN.length());
         String username = getUsernameFromToken(token);
         if (cache.isUserOnCache(token)) {
             log.info("[Log] Successful - {} disconnected and removing data from cache", username);
             cache.removeUser(token);
         }
-        return username;
+        Map<String, String> logoutMsg = new HashMap<>();
+        logoutMsg.put("message", String.format("User: %s logged out successfully.", username));
+        return logoutMsg;
     }
 
     private String getUsernameFromToken(String token) {
