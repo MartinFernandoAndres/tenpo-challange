@@ -1,22 +1,35 @@
 # Tenpo challange - Andres Martin
 
-Pasos a seguir para probar
+## How to run
 
-   - Clonar repo
-   - Instalar docker, maven y java 11
-   - Ejecutar en consola: mvn clean install && docker-compose up
 
-Tecnologias utilizadas: 
+   - Clone repository
+   
+   - Install docker, maven and java 11
+  
+   - Install Maven dependencies and run the project on docker containers with
 
-   * Logs, getters, setters con lombok
-   * Tests con JUnit y Mockito con patron naming Given-When-Then
-   * Cache para Users con google common
-   * Swagger disponible en http://localhost:8080/swagger-ui.html#/ y colección postman adjunta
-   * Authorization a traves de JWT via del header Authorization: "Token: ${token}" que brinda al logear el user previamente creado
-   * Spring security, JPA
-   * Handleo de exceptions
+```
+   mvn clean install && docker-compose up
+```
 
-Requerimientos
+## Technologies
+
+   - Lombok: Logs, getters, settersn
+   
+   - Tests with JUnit y Mockito, naming pattern Given-When-Then
+   
+   - Cache for Users with google common
+   
+   - Swagger available in http://localhost:8080/swagger-ui.html#/ and attached postman collection
+   
+   - Authorization through JWT via the Authorization header: "Token: ${token}" that provides when logging in the previously created user
+   
+   - Spring security, JPA
+   
+   - Exception handling
+
+##  Requirement
 
 Los requerimientos son los siguientes:
 1. Debes desarrollar una API REST en Spring Boot utilizando java 11 con las siguientes
